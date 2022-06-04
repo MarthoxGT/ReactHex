@@ -13,10 +13,20 @@ function Game() {
   }, []);
 
   function checkColor(fila, columna) {
-    if (fila % 2 === 0) {
-      return columna % 2 === 0 ? "whiteCell" : "blackCell";
-    }
-    return columna % 2 === 0 ? "blackCell" : "whiteCell";
+    const borderStyle = [];
+
+    if (columna === 0) borderStyle.push("horizontalLeftBorder");
+    if (columna === BOARDSIZE - 1) borderStyle.push("horizontalRightBorder");
+
+    if (fila === 0) borderStyle.push("verticalTopBorder");
+    if (fila === BOARDSIZE - 1) borderStyle.push("verticalBottomBorder");
+
+    return borderStyle.join(" ");
+  }
+
+  function playCell(cellId) {
+    const cell = document.getElementById(cellId);
+    cell.style.setProperty("--cell-color", "green");
   }
 
   function createTable() {
@@ -24,11 +34,12 @@ function Game() {
     for (let i = 0; i < BOARDSIZE; i++) {
       const row = [];
       for (let j = 0; j < BOARDSIZE; j++) {
-        table.push(
+        row.push(
           <div
             className={`tableCell ${checkColor(i, j)}`}
-            key={`${i}${j}`}
-            id={`${i}${j}`}
+            key={`${i}:${j}`}
+            id={`${i}:${j}`}
+            onClick={(event) => playCell(event.target.id)}
           />
         );
       }
@@ -40,7 +51,17 @@ function Game() {
 
   return (
     <div className="game">
-      <div className="board">{board}</div>
+      <div className="board">
+        {board?.map((row, index) => (
+          <div
+            key={`row:${index}`}
+            style={{ marginLeft: `${index * 25}px` }}
+            className="tableRow"
+          >
+            {row}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
