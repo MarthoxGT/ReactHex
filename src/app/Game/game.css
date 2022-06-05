@@ -1,0 +1,41 @@
+.game {
+  display: flex;
+}
+
+.board {
+  display: flex;
+  flex-flow: column;
+}
+
+.tableRow {
+  display: flex;
+  flex-flow: row;
+}
+
+.tableCell {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  background-color: var(--cell-color, var(--white-cell));
+  margin: 8px 1px;
+}
+
+.tableCell:before,
+.tableCell:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+}
+
+.tableCell:before {
+  bottom: 100%;
+  border-bottom: 14px solid var(--cell-color, var(--white-cell));
+}
+
+.tableCell:after {
+  top: 100%;
+  width: 0;
+  border-top: 14px solid var(--cell-color, var(--white-cell));
+}

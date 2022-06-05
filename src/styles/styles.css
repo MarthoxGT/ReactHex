@@ -1,0 +1,21 @@
+html {
+  --background: #0B272B;
+  --accent-bg-1: #1B3B40;
+  --accent-bg-2: #3A6B62;
+  --accent-1: #5BC0BE;
+  --accent-2: #70FFD2;
+  --text-color-1: #ffff;
+  --white-cell: white;
+  --black-cell: black;
+  --cell-separator: black;
+
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: var(--text-color-1);
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+}
