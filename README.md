@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# React Hex
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Hex is a connection strategy game for two players
 
-In the project directory, you can run:
+### Rules
 
-### `yarn start`
+1. Players choose a colour and takes turns. On each turn one counter is placed in an empty hexagonal cell.
+2. Counters may not be moved except with the swap rule
+3. The first player to form a connected path of their counters linking the opposing sides of the board marked by their colour wins.
+4. The four corner hexagons belong to both adjacent sides.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Swap rule
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+On their first move the second player may move normally, or choose to swap their piece with that placed by the first player. [This encourages the first player to only choose a moderately strong first move and so reduces any advantage of going first. Ignore the swap rule for the first few games.]
 
-### `yarn test`
+### Basic Strategy
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Play defensively: defence is also attack.
+1. Use bridges to make connections between your pieces and simultaneously to block your opponent.
+1. If you can think of a strong response to your own move then look for a better one!
+1. Never give up the game until it is clearly over but abandon areas of the board which are hopeless.
 
-### `yarn build`
+## Local setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Requisites:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- node (version 18)
+- yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Steps
 
-### `yarn eject`
+1. Clone this repo
+2. Get inside the project: `cd ReactHex`
+3. Install the dependencies by typing: `yarn install`
+4. Start the project by typing: `yarn start`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Post setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After the setup you just need to run `yarn start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Docker setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Requisites
 
-## Learn More
+- Docker
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Steps
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone this repo
+2. Get inside the project: `cd ReactHex`
+3. Build the image: `docker build -t reacthex ./`
+4. Run the container: `docker run -d --name react-hex -v $PROJECTDIR:/app -p 3000:3000 reacthex`
 
-### Code Splitting
+Note: $PROJECTDIR must be the absolute path of the project folder, once inside the path you can obtain it by typing `pwd` in your terminala
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Post setup
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+After the setup you just need to run: `docker start reacthex`
