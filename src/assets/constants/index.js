@@ -1,1 +1,1 @@
-export { default as tableConfig } from "./board/board-conf.json";
+export { default as boardConfig } from "./board/board-conf.json";
