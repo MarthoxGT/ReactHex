@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-
+import { constants } from "../../assets";
 import "./board.css";
 
-import { boardConfig } from "../../assets/constants";
+const { boardConfig } = constants;
 const BOARDSIZE = boardConfig["BOARDSIZE"];
 
 function Board() {
-  const [board, setBoard] = useState([]);
+  const [board, setBoard] = useState<Array<Array<JSX.Element>>>([]);
+  const [player, _setPlayer] = useState(true);
 
   useEffect(() => {
     setBoard(createTable);
   }, []);
 
-  function checkColor(fila, columna) {
-    const borderStyle = [];
+  function checkColor(fila: Number, columna: Number) {
+    const borderStyle: string[] = [];
 
     if (columna === 0) borderStyle.push("horizontalLeftBorder");
     if (columna === BOARDSIZE - 1) borderStyle.push("horizontalRightBorder");
@@ -24,22 +25,26 @@ function Board() {
     return borderStyle.join(" ");
   }
 
-  function playCell(cellId) {
+  function playCell(cellId: string) {
     const cell = document.getElementById(cellId);
-    cell.style.setProperty("--cell-color", "green");
+    cell?.style.setProperty("--cell-color", player ? "green" : "red");
+    // setPlayer((player) => !player);
   }
 
   function createTable() {
-    const table = [];
+    const table: JSX.Element[][] = [];
     for (let i = 0; i < BOARDSIZE; i++) {
-      const row = [];
+      const row: JSX.Element[] = [];
       for (let j = 0; j < BOARDSIZE; j++) {
         row.push(
           <div
             className={`tableCell ${checkColor(i, j)}`}
             key={`${i}:${j}`}
             id={`${i}:${j}`}
-            onClick={(event) => playCell(event.target.id)}
+            onClick={(event) => {
+              const target = event.target as HTMLElement;
+              playCell(target.id);
+            }}
           />
         );
       }
